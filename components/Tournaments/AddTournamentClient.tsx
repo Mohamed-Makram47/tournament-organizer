@@ -10,12 +10,12 @@ export function TournamentForm() {
   });
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-md rounded-lg">
+    <div className=" p-6  shadow-md rounded-lg">
       <h2 className="text-2xl font-bold mb-6">Create New Tournament</h2>
       <form action={formAction} className="space-y-4">
         {/* Tournament Name */}
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="name" className="block text-sm font-medium text-neutral-200">
             Tournament Name
           </label>
           <input
@@ -23,7 +23,7 @@ export function TournamentForm() {
             id="name"
             name="name"
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
             placeholder="Enter tournament name"
           />
           {state.errors?.name && (
@@ -33,14 +33,14 @@ export function TournamentForm() {
 
         {/* Description */}
         <div>
-          <label htmlFor="description" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="description" className="block text-sm font-medium text-neutral-200">
             Description
           </label>
           <textarea
             id="description"
             name="description"
             rows={4}
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            className="mt-1 block w-full bg-black border border-neutral-300 rounded-md shadow-sm py-2 px-3"
             placeholder="Tell us about the tournament"
           />
         </div>
@@ -48,7 +48,7 @@ export function TournamentForm() {
         {/* Date Range */}
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="startDate" className="block text-sm font-medium text-neutral-200">
               Start Date
             </label>
             <input
@@ -56,11 +56,11 @@ export function TournamentForm() {
               id="startDate"
               name="startDate"
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
           <div>
-            <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="endDate" className="block text-sm font-medium text-neutral-200">
               End Date
             </label>
             <input
@@ -68,14 +68,14 @@ export function TournamentForm() {
               id="endDate"
               name="endDate"
               required
-              className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
         </div>
 
         {/* Team IDs Input */}
         <div>
-          <label htmlFor="teamIds" className="block text-sm font-medium text-gray-700">
+          <label htmlFor="teamIds" className="block text-sm font-medium text-neutral-200">
             Team IDs (comma-separated)
           </label>
           <input
@@ -83,7 +83,7 @@ export function TournamentForm() {
             id="teamIds"
             name="teamIds"
             required
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
+            className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
             placeholder="Enter team IDs separated by commas"
           />
           {state.errors?.teamIds && (
@@ -91,36 +91,8 @@ export function TournamentForm() {
           )}
         </div>
 
-        {/* Tournament Type/Format */}
-        <div>
-          <label htmlFor="format" className="block text-sm font-medium text-gray-700">
-            Tournament Format
-          </label>
-          <select
-            id="format"
-            name="format"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
-          >
-            <option value="single-elimination">Single Elimination</option>
-            <option value="double-elimination">Double Elimination</option>
-            <option value="round-robin">Round Robin</option>
-            <option value="group-stage">Group Stage</option>
-          </select>
-        </div>
 
-        {/* Prize Information */}
-        <div>
-          <label htmlFor="prizePools" className="block text-sm font-medium text-gray-700">
-            Prize Pool Details
-          </label>
-          <input
-            type="text"
-            id="prizePools"
-            name="prizePools"
-            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3"
-            placeholder="Enter prize pool information"
-          />
-        </div>
+
 
         {/* Submit Button */}
         <div className="pt-4">

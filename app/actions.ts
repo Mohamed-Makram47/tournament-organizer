@@ -5,7 +5,7 @@ import { tournaments } from '@/lib/schema';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
-export async function addTournament(prevState: any, formData: FormData) {
+export async function addTournament( formData: FormData) {
   const name = formData.get('name');
   const description = formData.get('description');
   const startDate = formData.get('startDate');
@@ -29,38 +29,27 @@ export async function addTournament(prevState: any, formData: FormData) {
     ? String(teamIdsRaw).split(',').map(id => id.trim()).filter(id => id !== '').join(',')
     : '';
 
-    if (teamIds.split(',').length < 2) {
-      return {
-        errors: {
-          teamIds: 'At least two teams are required',
-        },
-        message: 'Failed to create tournament',
-      };
-    }
-
-
-  try {
-    const [newTournament] = await db
-      .insert(tournaments)
-      .values({
-        name: String(name),
-        description: description ? String(description) : null,
-        startDate: new Date(String(startDate)),
-        endDate: new Date(String(endDate)),
-        teamIds,
-        status: 'DRAFT'
-      })
-      .returning();
-
-    revalidatePath('/tournaments');
-
-    redirect(`/tournaments/${newTournament.id}`);
-
-  } catch (error) {
-    console.error('Tournament creation error:', error);
+  if (teamIds.split(',').length < 2) {
     return {
-      message: 'Database Error: Failed to create tournament',
-      errors: {},
+      errors: {
+        teamIds: 'At least two teams are required',
+      },
+      message: 'Failed to create tournament',
     };
   }
+
+  const [newTournament] = await db
+  .insert(tournaments)
+  .values({
+    name: String(name),
+    description: description ? String(description) : null,
+    startDate: new Date(String(startDate)),
+    endDate: new Date(String(endDate)),
+    teamIds,
+    status: 'DRAFT'
+  })
+  .returning();
+
+revalidatePath('/tournaments');
+redirect(`/tournaments/${newTournament.id}`);
 }
