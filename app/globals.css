@@ -15,7 +15,7 @@
   --color-5: 90 100% 63%;
 }
 .button-primary {
-  @apply rounded-full font-medium md:font-bold  bg-blue-500 px-2 py-1 md:px-4 md:py-2 text-white transition-colors duration-200 hover:bg-blue-600 ;
+  @apply rounded-full font-medium md:font-bold  bg-blue-500 px-2 py-1 md:px-3 md:py-1.5 text-white transition-colors duration-200 hover:bg-blue-600 ;
 }
 .plain-icon {
   @apply w-5 h-5 md:w-6 md:h-6;

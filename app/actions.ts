@@ -58,15 +58,11 @@ export async function addTournament(prevState:any, formData: FormData) {
 
 export async function getTournamentById(tournamentId: string) {
   'use cache';
-  // Validate the input ID
-  if (!tournamentId) {
-    return {
-      message: 'Failed to fetch tournament',
-    };
-  }
 
   try {
     const tournamentData = await db.select().from(tournaments).where(eq(tournaments.id, tournamentId));
+    console.log('getTournamentByIdtournamentData', tournamentData);
+    
     if (!tournamentData) {
       return {
         message: `This Tournament Does not exist`,
