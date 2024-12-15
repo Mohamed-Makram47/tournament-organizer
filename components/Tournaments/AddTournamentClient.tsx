@@ -2,7 +2,7 @@
 
 import { useFormState } from 'react-dom';
 import { addTournament } from '@/app/actions';
-
+import { XIcon } from "lucide-react";
 export function TournamentForm() {
   const [state, formAction] = useFormState(addTournament, { 
     errors: {}, 
@@ -10,13 +10,17 @@ export function TournamentForm() {
   });
 
   return (
-    <div className=" p-6  shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-6">Create New Tournament</h2>
+    <div className=" shadow-md rounded-lg">
+      <div className='flex justify-between items-center mb-6 '>
+      <h2 className="text-xl md:text-3xl font-bold ">New Tournament</h2>
+      <XIcon className="plain-icon text-neutral-300 hover:text-neutral-200 transition-colors duration-200 cursor-pointer" onClick={()=>window.location.href='/tournaments'}/>
+
+      </div>
       <form action={formAction} className="space-y-4">
         {/* Tournament Name */}
         <div>
           <label htmlFor="name" className="block text-sm font-medium text-neutral-200">
-            Tournament Name
+             Name
           </label>
           <input
             type="text"
@@ -56,7 +60,7 @@ export function TournamentForm() {
               id="startDate"
               name="startDate"
               required
-              className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full border colorpickernewtournamentform border-neutral-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
           <div>
@@ -68,7 +72,7 @@ export function TournamentForm() {
               id="endDate"
               name="endDate"
               required
-              className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
+              className="mt-1 block w-full border colorpickernewtournamentform border-neutral-300 rounded-md shadow-sm py-2 px-3"
             />
           </div>
         </div>
@@ -76,7 +80,7 @@ export function TournamentForm() {
         {/* Team IDs Input */}
         <div>
           <label htmlFor="teamIds" className="block text-sm font-medium text-neutral-200">
-            Team IDs (comma-separated)
+            Teams
           </label>
           <input
             type="text"
@@ -84,7 +88,7 @@ export function TournamentForm() {
             name="teamIds"
             required
             className="mt-1 block w-full border bg-black border-neutral-300 rounded-md shadow-sm py-2 px-3"
-            placeholder="Enter team IDs separated by commas"
+            placeholder="Pick Teams to play"
           />
           {state.errors?.teamIds && (
             <p className="mt-2 text-sm text-red-600">{state.errors.teamIds}</p>
@@ -98,9 +102,9 @@ export function TournamentForm() {
         <div className="pt-4">
           <button
             type="submit"
-            className="w-full bg-blue-600 text-white py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="button-primary w-full text-base md:text-lg"
           >
-            Create Tournament
+            CREATE
           </button>
         </div>
 

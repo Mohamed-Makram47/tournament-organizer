@@ -1,22 +1,25 @@
-import { redirect } from 'next/navigation'
- 
-async function fetchTournamentData(TournamentID: string) {
-  const res = await fetch('https://...')
-  if (!res.ok) return undefined
-  return res.json()
-}
- 
-export default async function Home({
-  params,
-}: {
-  params: Promise<{ TournamentID: string }>
-}) {
-  const TournamentID = (await params).TournamentID
+import { getTournamentById } from '@/app/actions';
+import { redirect } from 'next/navigation';
+
+export default async function Home({ params }: { params: any }) {
+  const { TournamentID } = params;
   if (!TournamentID) {
-    redirect('/')
+    redirect('/');
   }
- 
-  const team = await fetchTournamentData(TournamentID)
- 
-  // ...
+  const tournamentData = await getTournamentById(TournamentID);
+console.log('tournamentData', tournamentData);
+if(!tournamentData.data) {
+  return (
+    <div className='h-screen flex flex-col items-center justify-center '>
+      {tournamentData.message}
+    </div>
+  );
 }
+  return (
+    <div>
+ass
+    </div>
+  );
+}
+
+export const dynamic = 'force-static';

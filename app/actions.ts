@@ -4,8 +4,9 @@ import { db } from '@/lib/drizzle';
 import { tournaments } from '@/lib/schema';
 import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
+import { eq } from "drizzle-orm";
 
-export async function addTournament( formData: FormData) {
+export async function addTournament(prevState:any, formData: FormData) {
   const name = formData.get('name');
   const description = formData.get('description');
   const startDate = formData.get('startDate');
@@ -50,6 +51,36 @@ export async function addTournament( formData: FormData) {
   })
   .returning();
 
-revalidatePath('/tournaments');
-redirect(`/tournaments/${newTournament.id}`);
+  revalidatePath('/tournaments');
+  redirect(`/tournaments/${newTournament.id}`);
+}
+
+
+export async function getTournamentById(tournamentId: string) {
+  'use cache';
+  // Validate the input ID
+  if (!tournamentId) {
+    return {
+      message: 'Failed to fetch tournament',
+    };
+  }
+
+  try {
+    const tournamentData = await db.select().from(tournaments).where(eq(tournaments.id, tournamentId));
+    if (!tournamentData) {
+      return {
+        message: `This Tournament Does not exist`,
+      };
+    }
+
+    return {
+      data: tournamentData,
+      message: 'Tournament fetched successfully',
+    };
+  } catch (error) {
+    console.error('Error fetching tournament:', error);
+    return {
+      message: 'This Tournament Does not ',
+    };
+  }
 }
